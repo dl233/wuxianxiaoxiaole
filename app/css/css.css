@@ -1,0 +1,60 @@
+body{
+	background-color: antiquewhite;
+	height: 100vh;
+	width: 100vw;
+}
+
+
+#header{
+	position: fixed;
+	top: 0;
+	width: 100vw;
+	height: 30vh;
+	text-align: center;
+}
+
+#userlogo{
+	position:relative;
+	height: 10vh;
+	width: 10vh;
+	top:3vh;
+	border-radius: 1VH;
+}
+
+#score{
+	position: fixed;
+	top: 14vh;
+	margin: 2vh;
+	height: 4vh;
+	width: 95vw;
+	color: #E96365;
+	font-size: 6vh;
+}
+
+#main{
+	position: fixed;
+	top: 30vh;
+	height: 100vw;
+	width: 100vw;
+}
+
+.energy{
+	position:fixed;
+	border-radius:1vh;
+	top: 22vh;
+	background:#E96365;
+	margin: 2vh;
+    height: 4vh;
+	width: 16vw;
+}
+
+.board{
+	position:fixed;
+	color: white;
+	text-align: center;
+	font-size:16vw;
+	height: 19vw;
+	width: 19vw;
+	border-radius: 2vw;
+	background-color:#62A8E9;
+}
