@@ -71,24 +71,30 @@ function checkclear(){
 }
 
 function check(i,j){
+	if(!same[i][j]){return;}
 	sum++;
-	console.log("check"+i+" "+j);
+	console.log("check"+i+" "+j+" "+same[i][j]+" "+sum);
 	same[i][j]=false;
-	if((j+1)<=4&&board[i][j]!==0&&board[i][j]===board[i][j+1]){
+	if((j+1)<=4&&board[i][j]!==0&&board[i][j]===board[i][j+1]&&same[i][j+1]){
+		console.log("right");
 					check(i,j+1);
 				}
-	else if((j-1)>=0&&board[i][j]!==0&&board[i][j]===board[i][j-1]){
+	else if((j-1)>=0&&board[i][j]!==0&&board[i][j]===board[i][j-1]&&same[i][j-1]){
+		console.log("left");
 					check(i,j-1);
 				}
-	else if((i+1)<=4&&board[i][j]!==0&&board[i][j]===board[i+1][j]){
+	else if((i+1)<=4&&board[i][j]!==0&&board[i][j]===board[i+1][j]&&same[i+1][j]){
+		console.log("down");
 					check(i+1,j);
 				}
-	else if((i-1)>=0&&board[i][j]!==0&&board[i][j]===board[i-1][j]){
+	else if((i-1)>=0&&board[i][j]!==0&&board[i][j]===board[i-1][j]&&same[i-1][j]){
+		console.log("up");
 					check(i-1,j);
 				}
 	if(sum>=3){
 		board[i][j]=0;
 		showremove(i,j);
+     	setTimeout("updataboard()",500);
 	}
 
 }
