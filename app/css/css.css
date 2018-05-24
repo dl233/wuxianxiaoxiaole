@@ -38,6 +38,11 @@ body{
 	width: 100vw;
 }
 
+#downpage{
+	position: fixed;
+	top: 95vh;
+	text-align: center;
+}
 .energy{
 	position:fixed;
 	border-radius:1vh;

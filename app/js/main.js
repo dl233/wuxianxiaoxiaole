@@ -70,6 +70,7 @@ function checkclear(){
 	}
 }
 
+//递归检查每个单元格
 function check(i,j){
 	if(!same[i][j]){return;}
 	sum++;
