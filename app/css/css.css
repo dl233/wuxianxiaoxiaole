@@ -1,9 +1,136 @@
-body{
-	background-color: antiquewhite;
-	height: 100vh;
-	width: 100vw;
+@keyframes tl{
+	from{
+		top:50vh;
+		opacity: 0;
+	}
+	to{
+		top: 20vh;
+		opacity: 1;
+	}
 }
 
+@keyframes startbutton{
+	0%{
+		opacity: 0;
+		top: 60vh;
+	}
+	30%{
+		opacity:1;
+		background-color: #FFB5C5;
+		color: #FFF5EE;
+	}
+	60%{
+		
+		background-color: #FFFF00;
+		color: #B3EE3A;
+	}
+	100%{
+		top:50vh;
+		background-color:burlywood;
+		color: black;
+	}
+}
+
+@keyframes sadd{
+	0%{
+		opacity: 0;
+		top:14vh;
+	}
+	50%{
+		opacity: 1;
+		top: 12vh;
+	}
+	100%{
+		opacity: 0;
+		top: 10vh;
+		display: none;
+	}
+}
+
+@keyframes ends{
+	from{
+		opacity: 0;
+		top: 60vh;
+	}
+	to{
+		opacity: 1;
+		top: 30vh;
+	}
+}
+
+body{
+	margin: 0;
+	padding: 0;
+}
+
+#page1{
+	background-color: #838B8B;
+	height: 100vh;
+	width: 100vw;
+	margin: 0;
+	padding: 0;
+	text-align: center;
+	display:inherit;
+}
+
+#page2{
+	background-color:#FFF68F;
+	position: fixed;
+	height: 100vh;
+	width: 100vw;
+	opacity: 0;
+	display: none;
+}
+
+#page3{
+	background-color: #838B8B;
+	height: 100vh;
+	width: 100vw;
+	margin: 0;
+	padding: 0;
+	text-align: center;
+	display:none;
+}
+
+#title,#gameovertext{
+	animation: tl 2.5s 1;
+	position: relative;
+	top:20vh ;
+	margin: 0;
+	padding: 0;
+	font-family:"微软雅黑";
+	font-size: 8vh;
+	color: white;
+}
+
+#start,#end{
+	animation: startbutton 2.5s 1;
+	position: relative;
+	top: 50vh;
+	font-size: 5vh;
+	font-family:"微软雅黑";
+	background-color:burlywood;
+	color: black;
+	padding: 2vh;
+	border-radius: 1vh;
+	box-shadow: 8px 8px 5px #FFFFFF;
+}
+
+#endscore{
+	animation: ends 2s 1;
+	margin: 0;
+	padding: 0;
+	position:relative;
+	top: 30vh;
+	font-size: 15vh;
+	font-family:"微软雅黑";
+	color: gold;
+}
+
+#start:active,#end:active{
+	color: white;
+	box-shadow:none;
+}
 
 #header{
 	position: fixed;
@@ -31,6 +158,17 @@ body{
 	font-size: 6vh;
 }
 
+#scoreadd{
+	animation: sadd 1s 1;
+	position: fixed;
+	top: 12vh;
+	left: 70vw;
+	color: #E96365;
+	font-size: 4vh;
+	opacity: 0;
+	display: none;
+}
+
 #main{
 	position: fixed;
 	top: 30vh;
@@ -41,7 +179,7 @@ body{
 #downpage{
 	position: fixed;
 	top: 93vh;
-	text-align: center;
+	text-align: center; 
 }
 
 #Copyright{

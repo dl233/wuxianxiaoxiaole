@@ -5,24 +5,57 @@ var board=new Array();//每个格子的值
 var same=new Array();//每一个格子都设一个检测信号量
 var del=new Array();//每一个格子都设一个消除信号量
 var lock=false;//锁住屏幕
-var sum=0;//判断有多少格子是连续的
-var energy=5;//
+var sum;//判断有多少格子是连续的
+var energy;//能量条
 
-var changetime=0;//检测时间
-var updataboardtime=0;//更新时间
-var randomboardtime=0;//随机数生成时间
+var score;//分数
+var changetime;//检测时间
+var updataboardtime;//更新时间
 
 
 $(document).ready(function(){
-	init();
-	updataboard();
+	if(checksize()){init();}
+	else{
+		lock=true;
+		$('#title').text("请使用移动端访问！")
+	}
 });
+
+function start(i){
+	console.log("start~");
+	$('#page1').css("display","none");
+	$('#page3').css("display","none");
+	showpage(i);//切页动画
+	score=0;//初始分数
+	changetime=1800;//消除时间
+	updataboardtime=900;//更新时间
+	delshowtime=400;//消除时间
+	changescore(score);
+	lock=false;
+}
+
+
+function startbutton(){
+	console.log("start-button");
+	if(!lock){
+		lock=true;
+	setTimeout("start(2)",500)
+	}
+	else
+		return;
+}
 
 
 //初始化
 function init(){
+	sum=0;
+	energy=5;
+	score=0;//初始分数
+	changetime=0;//消除时间
+	updataboardtime=0;//更新时间
+	delshowtime=0;//消除时间
 	
-	for(let i=0;i<5;i++){
+	for(let i=0;i<energy;i++){
 		$('#e-'+i).css('left',getEleft(i));
 		
 		board[i]=new Array();
@@ -52,12 +85,13 @@ function updataboard(){
 			    $('#b-'+i+'-'+j).css('top',getBtop(i));
 			    $('#b-'+i+'-'+j).css('left',getBleft(j));
 				$('#b-'+i+'-'+j).css('background-color',getBcolor(board[i][j]));
+			    $('#b-'+i+'-'+j).css('content',board[i][j]);
 			    $('#b-'+i+'-'+j).text(board[i][j]);
 		}
 	}
 }
 
-//开始游戏随机生成单元格
+//初始化随机生成单元格
 function initrandom(){
 	let randomNumber;
 	for(let i=0;i<5;i++){
@@ -77,10 +111,7 @@ function randomboard(i,j){
 
 //单击修改元素值
 function Bclick(evt){
-	changetime=1800;
-	updataboardtime=900;
-	randomboardtime=700;
-	delshowtime=300;
+	$('#scoreadd').css("display","inherit");
 	if(lock)
 		return;
 	energychange(-1);
@@ -91,6 +122,7 @@ function Bclick(evt){
 	board[i][j]++;
 	board[i][j]=board[i][j]%99;
 	$('#b-'+i+'-'+j).text(board[i][j]);
+	$('#b-'+i+'-'+j).css('background-color',getBcolor(board[i][j]));
 	checkclear();
 	console.log("OVER");
 }
@@ -105,6 +137,9 @@ function checkclear(){
 	}
 	else{
 		lock=false;
+		if(energy<=0){
+			gameover();
+		}
 	}
 	cleararr(same);//消除所有检测信号量
 	return false;
@@ -136,24 +171,30 @@ function check(i,j){
 
 }
 
+//检测单元格并删除3个相同数量及以上的方块
 function delateboard(){
 	for(let i=0;i<5;i++){
 		for(let j=0;j<5;j++){
 			if(same[i][j]){
 				check(i,j);
 					if(sum>=3){
+						del[i][j]=true;
 						energychange(1);
+						score+=board[i][j]*sum*10;
+						showscoreadd(board[i][j]*sum*10);
+						showbig(i,j,board);
 						for(let a=0;a<5;a++){
 							for(let b=0;b<5;b++){
 							if(!del[a][b]){
 							  board[a][b]=0;
 							  showremove(a,b);
 							  
-							  setTimeout("downmove()",300);
-     						  setTimeout("updataboard()",updataboardtime);
 									}
 								}
 							}
+						  setTimeout("downmove()",300);
+						  setTimeout("updataboard()",updataboardtime);
+						 changescore(score);
 						cleararr(del);//消除所有消除信号量
 			    		sum=0;
 						return true;
@@ -166,7 +207,7 @@ function delateboard(){
 	return false;
 }
 
-
+//向下移动检测
 function downmove(){
 	console.log("downmove")
 	for(let j=0;j<5;j++){
@@ -183,6 +224,7 @@ function downmove(){
 	}
 }
 
+//更新能量条
 function energychange(num){
 	energy+=num;
 	if(num>0){
@@ -199,4 +241,16 @@ function energychange(num){
 			showenergydel(energy);
 		}
 	}
+}
+
+function gameover(){
+	endscoret(score);
+	$('#page2').css("display","none");
+	$('#scoreadd').css("display","none");
+	
+	for(let i=0;i<5;i++){
+		showenergyadd(i);
+	}
+	showpage(3);
+	init();
 }

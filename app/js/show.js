@@ -29,4 +29,46 @@ function showenergyadd(num){
 	$('#e-'+num).animate({
 		opacity: 1,
 	},200);
+	
+}
+
+function showbig(i,j,board){
+	board[i][j]++;
+	$('#b-'+i+'-'+j).css('background-color',getBcolor(board[i][j]));
+	$('#b-'+i+'-'+j).text(board[i][j]);
+	$('#b-'+i+'-'+j).animate({
+		transform:"scale(2)",
+		
+		height:boardWidth*2,
+		width:boardWidth*2,
+		
+//		transform:"scale(1.5,1.5)",
+	},150);
+		$('#b-'+i+'-'+j).animate({
+		transform:"scale(1)",
+			
+		height:boardWidth,
+		width:boardWidth,
+//		transform:"scale(1,1)",
+	},150);
+	
+}
+
+function showscoreadd(number){
+	$('#scoreadd').text("+"+number);
+	$('#scoreadd').animate({
+		opacity:1,
+		top:"10vh",
+	},delshowtime);
+		$('#scoreadd').animate({
+		opacity:0,
+		top:"10vh",
+	},delshowtime);
+}
+
+function showpage(i){
+	$('#page'+i).css("display","inherit");
+	$("#page"+i).animate({
+		opacity:1,
+	},300);
 }

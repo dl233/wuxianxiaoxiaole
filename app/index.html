@@ -17,13 +17,17 @@ content="user-scalable=no"/>
 </head>
 
 <body>
-<div id="page1"></div>
+<div id="page1">
+	<h1 id="title">无限消消乐</h1>
+	<a id="start" onClick="startbutton()">开始游戏</a>
+	</div>
 
 
 <div id="page2">
 	<div id="header">
 		<img id="userlogo" alt="userlogo" src="css/img/userlogo.png">
 		<h2 id="score">0</h2>
+		<h3 id="scoreadd"></h3>
 		<div class="energy" id="e-0"></div>
 		<div class="energy" id="e-1"></div>
 		<div class="energy" id="e-2"></div>
@@ -32,8 +36,14 @@ content="user-scalable=no"/>
 	</div>	
 	<div id="main">
 	</div>
-<div id="downpage"><lable id="Copyright">Copyright © 2018 1271764260@qq.com <br>版权所有</lable></div>
+	<div id="downpage"><lable id="Copyright">Copyright © 2018 1271764260@qq.com <br>版权所有</lable></div>
 </div>
+
+	<div id="page3">
+		<h1 id="gameovertext">Game Over!</h1>
+		<h2 id="endscore"></h2>
+		<a id="end" onClick="startbutton()">我不服！再来一次</a>
+	</div>
 
 </body>
 </html>
