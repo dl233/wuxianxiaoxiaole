@@ -5,9 +5,12 @@ var board=new Array();//每个格子的值
 var same=new Array();//每一个格子都设一个检测信号量
 var del=new Array();//每一个格子都设一个消除信号量
 var lock=false;//锁住屏幕
+var musiclock=true;//消除音乐锁
 var sum;//判断有多少格子是连续的
 var energy;//能量条
+var deltime=0;//消除的次数
 
+var maxboard;//最大单元格数值
 var score;//分数
 var changetime;//检测时间
 var updataboardtime;//更新时间
@@ -27,8 +30,8 @@ function start(i){
 	$('#page3').css("display","none");
 	showpage(i);//切页动画
 	score=0;//初始分数
-	changetime=1800;//消除时间
-	updataboardtime=900;//更新时间
+	changetime=1300;//消除时间
+	updataboardtime=600;//更新时间
 	delshowtime=400;//消除时间
 	changescore(score);
 	lock=false;
@@ -48,6 +51,7 @@ function startbutton(){
 
 //初始化
 function init(){
+	maxboard=0;
 	sum=0;
 	energy=5;
 	score=0;//初始分数
@@ -80,7 +84,13 @@ function updataboard(){
 				$('#main').append('<div class="board" id="b-'+i+'-'+j+'" onClick="Bclick(this)"></div>');
 			
 				if(board[i][j]===0)
-				randomboard(i,j);
+				{randomboard(i,j);}
+			else if(board[i][j]>maxboard){
+				maxboard=board[i][j]
+				if(maxboard>8){
+					afterscore=maxboard-8;
+				}
+			}
 			
 			    $('#b-'+i+'-'+j).css('top',getBtop(i));
 			    $('#b-'+i+'-'+j).css('left',getBleft(j));
@@ -117,6 +127,7 @@ function Bclick(evt){
 	energychange(-1);
 	console.log("click");
 	lock=true;
+	musiclock=false;
 	let i=evt.id.charAt(2);
 	let j=evt.id.charAt(4);
 	board[i][j]++;
@@ -137,6 +148,8 @@ function checkclear(){
 	}
 	else{
 		lock=false;
+		musiclock=true;
+		deltime=0;
 		if(energy<=0){
 			gameover();
 		}
@@ -183,6 +196,7 @@ function delateboard(){
 						score+=board[i][j]*sum*10;
 						showscoreadd(board[i][j]*sum*10);
 						showbig(i,j,board);
+						deltime++;
 						for(let a=0;a<5;a++){
 							for(let b=0;b<5;b++){
 							if(!del[a][b]){
@@ -191,6 +205,10 @@ function delateboard(){
 							  
 									}
 								}
+							}
+							if(!musiclock){
+								   $('#xiaochumusic')[0].play();
+							       delmusic(deltime);
 							}
 						  setTimeout("downmove()",300);
 						  setTimeout("updataboard()",updataboardtime);

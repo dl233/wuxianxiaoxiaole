@@ -4,7 +4,7 @@ var documentWidth=window.innerWidth;
 var documentHeight=window.innerHeight;
 var documentBH=documentHeight*0.3;
 var boardWidth=documentWidth*0.19;
-
+var afterscore=0;
 
 
 function checksize(){
@@ -57,16 +57,16 @@ function getBcolor(number){
 }
 
 function randomtext(number){
-	if(number>0.9)
-		return 5;
+	if(number>0.95)
+		return 5+afterscore;
 	else if(number>0.75)
-		return 4;
+		return 4+afterscore;
 	else if(number>0.55)
-		return 3;
+		return 3+afterscore;
 	else if(number>0.35)
-		return 2;
+		return 2+afterscore;
 	else
-		return 1;
+		return 1+afterscore;
 }
 
 function cleararr(arr){
@@ -89,4 +89,14 @@ function endscoret(score){
 	else{
 		$('#endscore').css('font-size','15;vh');
 	}
+}
+
+function delmusic(number){
+	if(number>=3&&number<=5){
+		$('#del-x')[0].play();
+	}
+	else if(number>5){
+		$('#del-x')[0].play();
+	}
+	else return;
 }
