@@ -93,7 +93,7 @@ function endscoret(score){
 
 function delmusic(number){
 	if(number>=3&&number<=5){
-		$('#del-x')[0].play();
+		$('#del-'+number)[0].play();
 	}
 	else if(number>5){
 		$('#del-x')[0].play();
