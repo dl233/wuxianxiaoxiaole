@@ -56,13 +56,21 @@ function showbig(i,j,board){
 
 function showscoreadd(number){
 	$('#scoreadd').text("+"+number);
-	$('#scoreadd').animate({
+       floatscore();
+}
+
+function floatscore(){
+		$('#scoreadd').animate({
 		opacity:1,
 		top:"10vh",
 	},delshowtime);
 		$('#scoreadd').animate({
 		opacity:0,
-		top:"10vh",
+		top:"8vh",
+	},delshowtime);
+	$('#scoreadd').animate({
+		opacity:0,
+		top:"12vh",
 	},delshowtime);
 }
 

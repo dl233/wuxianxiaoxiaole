@@ -34,15 +34,15 @@
 @keyframes sadd{
 	0%{
 		opacity: 0;
-		top:14vh;
+		top:12vh;
 	}
 	50%{
 		opacity: 1;
-		top: 12vh;
+		top: 10vh;
 	}
 	100%{
 		opacity: 0;
-		top: 10vh;
+		top: 8vh;
 		display: none;
 	}
 }
@@ -169,7 +169,7 @@ body{
 #scoreadd{
 	animation: sadd 1s 1;
 	position: fixed;
-	top: 12vh;
+	top: 10vh;
 	left: 70vw;
 	color: #E96365;
 	font-size: 4vh;

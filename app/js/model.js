@@ -5,7 +5,7 @@ var documentHeight=window.innerHeight;
 var documentBH=documentHeight*0.3;
 var boardWidth=documentWidth*0.19;
 var afterscore=0;
-
+var musiclock=true;
 
 function checksize(){
 	if(documentWidth*1.3>documentHeight){
@@ -56,17 +56,18 @@ function getBcolor(number){
 	}
 }
 
+//随机数生成的概率
 function randomtext(number){
 	if(number>0.95)
-		return 5+afterscore;
-	else if(number>0.75)
-		return 4+afterscore;
-	else if(number>0.55)
-		return 3+afterscore;
+		return 5+afterscore;//0.05
+	else if(number>0.85)
+		return 4+afterscore;//0.1
+	else if(number>0.6)
+		return 3+afterscore;//0.25
 	else if(number>0.35)
-		return 2+afterscore;
+		return 2+afterscore;//0.25
 	else
-		return 1+afterscore;
+		return 1+afterscore;//0.35
 }
 
 function cleararr(arr){
@@ -100,3 +101,5 @@ function delmusic(number){
 	}
 	else return;
 }
+
+

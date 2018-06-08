@@ -1,5 +1,4 @@
 // JavaScript Document
- /* jshint esversion: 6 */
 "use strict";
 var board=new Array();//每个格子的值
 var same=new Array();//每一个格子都设一个检测信号量
@@ -39,13 +38,19 @@ function start(i){
 
 
 function startbutton(){
-	console.log("start-button");
+//	try{			
 	if(!lock){
 		lock=true;
 	setTimeout("start(2)",500)
 	}
 	else
 		return;
+//	}
+//	catch(err){
+//		alert("您的浏览器内核版本不支持！");
+//		return;
+//}
+
 }
 
 
@@ -59,13 +64,13 @@ function init(){
 	updataboardtime=0;//更新时间
 	delshowtime=0;//消除时间
 	
-	for(let i=0;i<energy;i++){
+	for(var i=0;i<energy;i++){
 		$('#e-'+i).css('left',getEleft(i));
 		
 		board[i]=new Array();
 		same[i]=new Array();
 		del[i]=new Array();
-		for(let j=0;j<5;j++){
+		for(var j=0;j<5;j++){
 			board[i][j]=0;
 			same[i][j]=true;
 			del[i][j]=true;
@@ -79,8 +84,8 @@ function init(){
 //更新布局
 function updataboard(){
 	$('.board').remove();
-	for(let i=0;i<5;i++){
-		for(let j=0;j<5;j++){
+	for(var i=0;i<5;i++){
+		for(var j=0;j<5;j++){
 				$('#main').append('<div class="board" id="b-'+i+'-'+j+'" onClick="Bclick(this)"></div>');
 			
 				if(board[i][j]===0)
@@ -103,9 +108,9 @@ function updataboard(){
 
 //初始化随机生成单元格
 function initrandom(){
-	let randomNumber;
-	for(let i=0;i<5;i++){
-		for(let j=0;j<5;j++){
+	var randomNumber;
+	for(var i=0;i<5;i++){
+		for(var j=0;j<5;j++){
 			randomNumber=Math.random();
 			board[i][j]=randomtext(randomNumber);
 		}
@@ -114,7 +119,7 @@ function initrandom(){
 
 //随机生成单元格
 function randomboard(i,j){
-	let randomNumber;
+	var randomNumber;
 	randomNumber=Math.random();
 	board[i][j]=randomtext(randomNumber);
 }
@@ -128,8 +133,8 @@ function Bclick(evt){
 	console.log("click");
 	lock=true;
 	musiclock=false;
-	let i=evt.id.charAt(2);
-	let j=evt.id.charAt(4);
+	var i=evt.id.charAt(2);
+	var j=evt.id.charAt(4);
 	board[i][j]++;
 	board[i][j]=board[i][j]%99;
 	$('#b-'+i+'-'+j).text(board[i][j]);
@@ -186,8 +191,8 @@ function check(i,j){
 
 //检测单元格并删除3个相同数量及以上的方块
 function delateboard(){
-	for(let i=0;i<5;i++){
-		for(let j=0;j<5;j++){
+	for(var i=0;i<5;i++){
+		for(var j=0;j<5;j++){
 			if(same[i][j]){
 				check(i,j);
 					if(sum>=3){
@@ -197,8 +202,8 @@ function delateboard(){
 						showscoreadd(board[i][j]*sum*10);
 						showbig(i,j,board);
 						deltime++;
-						for(let a=0;a<5;a++){
-							for(let b=0;b<5;b++){
+						for(var a=0;a<5;a++){
+							for(var b=0;b<5;b++){
 							if(!del[a][b]){
 							  board[a][b]=0;
 							  showremove(a,b);
@@ -228,10 +233,10 @@ function delateboard(){
 //向下移动检测
 function downmove(){
 	console.log("downmove")
-	for(let j=0;j<5;j++){
-		for(let i=4;i>=0;i--){
+	for(var j=0;j<5;j++){
+		for(var i=4;i>=0;i--){
 			console.log("check"+i+" "+j)
-			for(let k=4;k>i;k--){
+			for(var k=4;k>i;k--){
 				if(board[k][j]===0&&board[i][j]!==0){
 					showdownmove(i,j,k,board);
 					break;
@@ -266,9 +271,25 @@ function gameover(){
 	$('#page2').css("display","none");
 	$('#scoreadd').css("display","none");
 	
-	for(let i=0;i<5;i++){
+	for(var i=0;i<5;i++){
 		showenergyadd(i);
 	}
 	showpage(3);
 	init();
+}
+
+function changemusic(){
+	$('#scoreadd').css("display","inherit");
+	if(musiclock){
+		musiclock=false;
+		$('#bgmusic')[0].pause();
+		$('#scoreadd').text("暂停音乐");
+		floatscore();
+	}
+	else{
+		musiclock=true;
+		$('#bgmusic')[0].play();
+		$('#scoreadd').text("打开音乐");
+		floatscore();
+	}
 }
