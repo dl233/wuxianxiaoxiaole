@@ -130,6 +130,7 @@ function updataboard(){
 			    $('#b-'+i+'-'+j).css('left',getBleft(j));
 				$('#b-'+i+'-'+j).css('background-color',getBcolor(board[i][j]));
 			    $('#b-'+i+'-'+j).css('content',board[i][j]);
+			    $('#b-'+i+'-'+j).css('font-size',mainWidth*0.15);
 			    $('#b-'+i+'-'+j).text(board[i][j]);
 			
 //		      $('.board').css("height","100px");

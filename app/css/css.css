@@ -158,20 +158,21 @@ body{
 }
 
 #score{
-	position: fixed;
+	position: absolute;
+	text-align: right;
 	top: 14vh;
+	right: 10%;
 	margin: 2vh;
 	height: 4vh;
-	width: 95vw;
 	color: #E96365;
 	font-size: 6vh;
 }
 
 #scoreadd{
 	animation: sadd 1s 1;
-	position: fixed;
+	position: absolute;
 	top: 10vh;
-	left: 70vw;
+	left: 85%;
 	color: #E96365;
 	font-size: 4vh;
 	opacity: 0;
@@ -209,7 +210,6 @@ body{
 .board{
 	position:absolute;
 	color: white;
-	font-size:350%;
 	height: 19%;
 	width: 19%;
 	border-radius: 30%;
