@@ -18,10 +18,6 @@ var updataboardtime;//更新时间
 $(document).ready(function(){
 	if(checksize()){init();}
 	else{
-		
-		
-		$('#title').text("请使用移动端访问！");
-		
 		$('#main').css("height","500px");
 		$('#main').css("width","500px");
 		$('#main').css("left",documentWidth/2-250);
