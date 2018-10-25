@@ -2,38 +2,41 @@
 "use strict";
 var documentWidth=window.innerWidth;
 var documentHeight=window.innerHeight;
-var documentBH=documentHeight*0.3;
+var mainWidth=documentWidth;
 var boardWidth=documentWidth*0.19;
 var afterscore=0;
 var musiclock=true;
 
 function checksize(){
 	if(documentWidth*1.3>documentHeight){
-		alert("分辨率不合适！");
 		return false;
 	}else
 		return true;
 }
 
-
+function setmainWidth(num){
+	mainWidth=Math.floor(num);
+	boardWidth=mainWidth*0.19;
+}
 
 function getEleft(i){
-	return documentWidth*0.02+i*(documentWidth*0.18);
+	return mainWidth*0.02+i*(mainWidth*0.18);
+	alert(mainWidth);
 }
 
 
 function getBleft(j){
-	return documentWidth*0.015+j*documentWidth*0.195;
+	return mainWidth*0.015+j*mainWidth*0.195;
 }
 
 
 function getBtop(i){
-	return documentBH+documentWidth*0.015+i*documentWidth*0.195;
+	return mainWidth*0.015+i*mainWidth*0.195;
 }
 
 
 function getBcolor(number){
-	switch(number){
+	switch(number%18){
 		case 1:return "#DAA520";break;
 		case 2:return "#7CFC00";break;
 		case 3:return "#7CCD7C";break;

@@ -122,6 +122,7 @@ body{
 	padding: 2vh;
 	border-radius: 1vh;
 	box-shadow: 8px 8px 5px #FFFFFF;
+	user-select:none;
 }
 
 #endscore{
@@ -141,7 +142,7 @@ body{
 }
 
 #header{
-	position: fixed;
+	position: absolute;
 	top: 0;
 	width: 100vw;
 	height: 30vh;
@@ -178,7 +179,7 @@ body{
 }
 
 #main{
-	position: fixed;
+	position: absolute;
 	top: 30vh;
 	height: 100vw;
 	width: 100vw;
@@ -196,22 +197,23 @@ body{
 	text-align: center;
 }
 .energy{
-	position:fixed;
+	position:absolute;
 	border-radius:1vh;
 	top: 22vh;
 	background:#8dfc79;
 	margin: 2vh;
     height: 4vh;
-	width: 16vw;
+	width: 16%;
 }
 
 .board{
-	position:fixed;
+	position:absolute;
 	color: white;
+	font-size:350%;
+	height: 19%;
+	width: 19%;
+	border-radius: 30%;
+	user-select:none;
 	text-align: center;
-	font-size:16vw;
-	height: 19vw;
-	width: 19vw;
-	border-radius: 2vw;
 	background-color:#62A8E9;
 }

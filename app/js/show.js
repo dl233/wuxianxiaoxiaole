@@ -41,7 +41,6 @@ function showbig(i,j,board){
 		
 		height:boardWidth*2,
 		width:boardWidth*2,
-		
 //		transform:"scale(1.5,1.5)",
 	},150);
 		$('#b-'+i+'-'+j).animate({
@@ -51,7 +50,7 @@ function showbig(i,j,board){
 		width:boardWidth,
 //		transform:"scale(1,1)",
 	},150);
-	
+	console.log(boardWidth+"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 }
 
 function showscoreadd(number){

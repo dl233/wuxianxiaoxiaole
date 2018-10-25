@@ -18,9 +18,42 @@ var updataboardtime;//更新时间
 $(document).ready(function(){
 	if(checksize()){init();}
 	else{
-		lock=true;
-		$('#title').text("请使用移动端访问！")
+		
+		
+		$('#title').text("请使用移动端访问！");
+		
+		$('#main').css("height","500px");
+		$('#main').css("width","500px");
+		$('#main').css("left",documentWidth/2-250);
+		
+		$('#header').css("height","300px");
+		$('#header').css("width","500px");
+		$('#header').css("left",documentWidth/2-250);
+		setmainWidth(parseInt($('#main').css("width")));
+        init();
 	}
+	//事件代理 优化
+	$('#main').click(function(ev){
+　　　　var ev = ev || window.event;
+　　　　var evt = ev.target || ev.srcElement;
+　　　　if(evt.className.toLowerCase() == 'board'){
+		$('#scoreadd').css("display","inherit");
+		if(lock)
+		return;
+		energychange(-1);
+		console.log("click");
+		lock=true;
+		musiclock=false;
+		var i=evt.id.charAt(2);
+		var j=evt.id.charAt(4);
+		board[i][j]++;
+		board[i][j]=board[i][j]%99;
+		$('#b-'+i+'-'+j).text(board[i][j]);
+		$('#b-'+i+'-'+j).css('background-color',getBcolor(board[i][j]));
+		checkclear();
+		console.log("OVER");
+　　　　}
+　　});
 });
 
 function start(i){
@@ -86,7 +119,7 @@ function updataboard(){
 	$('.board').remove();
 	for(var i=0;i<5;i++){
 		for(var j=0;j<5;j++){
-				$('#main').append('<div class="board" id="b-'+i+'-'+j+'" onClick="Bclick(this)"></div>');
+				$('#main').append('<div class="board" id="b-'+i+'-'+j+'"></div>');
 			
 				if(board[i][j]===0)
 				{randomboard(i,j);}
@@ -102,6 +135,15 @@ function updataboard(){
 				$('#b-'+i+'-'+j).css('background-color',getBcolor(board[i][j]));
 			    $('#b-'+i+'-'+j).css('content',board[i][j]);
 			    $('#b-'+i+'-'+j).text(board[i][j]);
+			
+//		      $('.board').css("height","100px");
+//		      $('.board').css("width","100px");
+//		      $('.board').css("border-radius","100px");
+//		      $('.board').css("font-size","80px");
+//		
+//		      $('.energy').css("height","40px");
+//		      $('.energy').css("width","100px");
+//		      $('.energy').css("margin","20px");
 		}
 	}
 }
@@ -124,24 +166,26 @@ function randomboard(i,j){
 	board[i][j]=randomtext(randomNumber);
 }
 
-//单击修改元素值
-function Bclick(evt){
-	$('#scoreadd').css("display","inherit");
-	if(lock)
-		return;
-	energychange(-1);
-	console.log("click");
-	lock=true;
-	musiclock=false;
-	var i=evt.id.charAt(2);
-	var j=evt.id.charAt(4);
-	board[i][j]++;
-	board[i][j]=board[i][j]%99;
-	$('#b-'+i+'-'+j).text(board[i][j]);
-	$('#b-'+i+'-'+j).css('background-color',getBcolor(board[i][j]));
-	checkclear();
-	console.log("OVER");
-}
+//单击修改元素值（事件代理后已优化）
+//function Bclick(event){
+//	var event=event || window.Event
+//	var evt=event.target
+//	$('#scoreadd').css("display","inherit");
+//	if(lock)
+//		return;
+//	energychange(-1);
+//	console.log("click");
+//	lock=true;
+//	musiclock=false;
+//	var i=evt.id.charAt(2);
+//	var j=evt.id.charAt(4);
+//	board[i][j]++;
+//	board[i][j]=board[i][j]%99;
+//	$('#b-'+i+'-'+j).text(board[i][j]);
+//	$('#b-'+i+'-'+j).css('background-color',getBcolor(board[i][j]));
+//	checkclear();
+//	console.log("OVER");
+//}
 
 //检测是否可以消除
 function checkclear(){
